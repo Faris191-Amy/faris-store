@@ -63,7 +63,7 @@ export function Header() {
             <div className="flex items-center justify-center w-10 h-10 rounded-md bg-primary text-primary-foreground font-bold text-xl">
               E
             </div>
-            <span className="hidden sm:block text-xl font-bold">إلكترو ستور</span>
+            <span className="hidden sm:block text-xl font-bold">faris store</span>
           </Link>
 
           {/* Desktop Navigation */}

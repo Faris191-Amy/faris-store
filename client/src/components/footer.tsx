@@ -124,7 +124,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                <span>الرياض، المملكة العربية السعودية</span>
+                <span> جمهورية مصر العربية شربين كفر الترعة الجديد</span>
               </div>
             </div>
           </div>
@@ -135,7 +135,7 @@ export function Footer() {
         {/* Payment Methods & Copyright */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground" data-testid="text-copyright">
-            2024 إلكترو ستور. جميع الحقوق محفوظة.
+          2024. جميع الحقوق محفوظة faris store
           </p>
           
           <div className="flex items-center gap-4">

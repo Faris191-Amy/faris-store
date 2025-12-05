@@ -46,7 +46,7 @@ export function CartDrawer() {
             {cart.total < FREE_SHIPPING_THRESHOLD && (
               <div className="px-6 py-4 bg-muted/30">
                 <div className="flex items-center justify-between text-sm mb-2">
-                  <span>أضف {remainingForFreeShipping.toLocaleString()} ر.س للشحن المجاني</span>
+                  <span>أضف {remainingForFreeShipping.toLocaleString()} ج.م للشحن المجاني</span>
                   <span className="font-medium">{Math.round(shippingProgress)}%</span>
                 </div>
                 <Progress value={shippingProgress} className="h-2" data-testid="progress-shipping" />
@@ -79,7 +79,7 @@ export function CartDrawer() {
                         {item.product.nameAr}
                       </h4>
                       <p className="text-primary font-bold" data-testid={`text-item-price-${item.product.id}`}>
-                        {item.product.price.toLocaleString()} ر.س
+                        {item.product.price.toLocaleString()} ج.م
                       </p>
                       
                       <div className="flex items-center justify-between mt-3">
@@ -127,19 +127,19 @@ export function CartDrawer() {
               <div className="space-y-3 mb-6">
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">المجموع الفرعي</span>
-                  <span className="font-medium" data-testid="text-subtotal">{cart.total.toLocaleString()} ر.س</span>
+                  <span className="font-medium" data-testid="text-subtotal">{cart.total.toLocaleString()} ج.م</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">الشحن</span>
                   <span className="font-medium text-green-600" data-testid="text-shipping">
-                    {cart.total >= FREE_SHIPPING_THRESHOLD ? "مجاني" : "50 ر.س"}
+                    {cart.total >= FREE_SHIPPING_THRESHOLD ? "مجاني" : "50 ج.م"}
                   </span>
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between text-lg">
                   <span className="font-semibold">الإجمالي</span>
                   <span className="font-bold text-primary" data-testid="text-total">
-                    {(cart.total + (cart.total >= FREE_SHIPPING_THRESHOLD ? 0 : 50)).toLocaleString()} ر.س
+                    {(cart.total + (cart.total >= FREE_SHIPPING_THRESHOLD ? 0 : 50)).toLocaleString()} ج.م
                   </span>
                 </div>
               </div>
