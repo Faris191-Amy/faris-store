@@ -1,9 +1,9 @@
 import { build as esbuild } from "esbuild";
 import { build as viteBuild } from "vite";
 import { rm, readFile } from "fs/promises";
+import path from "path";
 
-// server deps to bundle to reduce openat(2) syscalls
-// which helps cold start times
+// مكتبات لازم تتبندل مع السيرفر
 const allowlist = [
   "@google/generative-ai",
   "axios",
@@ -33,21 +33,34 @@ const allowlist = [
 ];
 
 async function buildAll() {
+  // حذف مجلد dist
   await rm("dist", { recursive: true, force: true });
 
-  console.log("building client...");
-  await viteBuild();
+  console.log("\n==============================");
+  console.log("🚀 Building client (Vite)...");
+  console.log("==============================\n");
 
-  console.log("building server...");
+  // تشغيل build للعميل مع تحديد root = client
+  await viteBuild({
+    configFile: path.resolve("vite.config.ts"),
+  });
+
+  console.log("\n==============================");
+  console.log("🛠 Building server (esbuild)...");
+  console.log("==============================\n");
+
+  // قراءة dependencies
   const pkg = JSON.parse(await readFile("package.json", "utf-8"));
   const allDeps = [
     ...Object.keys(pkg.dependencies || {}),
     ...Object.keys(pkg.devDependencies || {}),
   ];
+
+  // external = كل المكتبات غير الموجودة في allowlist
   const externals = allDeps.filter((dep) => !allowlist.includes(dep));
 
   await esbuild({
-    entryPoints: ["server/index.ts"],
+    entryPoints: ["server/index.ts"], // ← تأكد إن الملف موجود
     platform: "node",
     bundle: true,
     format: "cjs",
@@ -59,9 +72,14 @@ async function buildAll() {
     external: externals,
     logLevel: "info",
   });
+
+  console.log("\n==============================");
+  console.log("✔ Build completed successfully!");
+  console.log("==============================\n");
 }
 
 buildAll().catch((err) => {
+  console.error("❌ Build failed:");
   console.error(err);
   process.exit(1);
 });
